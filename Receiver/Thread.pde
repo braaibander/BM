@@ -3,10 +3,7 @@
 
 // A Thread using receiving UDP
 
-class ReceiverThread extends Thread {
-
-  // Port we are receiving.
-  int port = 9100; 
+class ReceiverThread extends Thread {   
   DatagramSocket ds; 
   // A byte array to read into (max size of 65536, could be smaller)
   byte[] buffer = new byte[65536]; 

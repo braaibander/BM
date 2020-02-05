@@ -9,7 +9,7 @@ import java.net.*;
 import java.io.*;
 
 // Config
-Boolean fullScreen = true;
+int port = 9100;
 
 PImage video;
 ReceiverThread thread;
