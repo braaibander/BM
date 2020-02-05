@@ -36,6 +36,9 @@ Capture cam;
 void setup() { 
   size(1280, 720);
   
+  println("Sending to: " + location + ":" + clientPort);
+  println("Dimensions: " + imageWidth + "x" + imageHeight);
+  
   try {
     socket = new DatagramSocket();
   } catch (SocketException e) {

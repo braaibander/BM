@@ -12,8 +12,8 @@ String machineId = "pc1";
 
 // Config
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
-    put("pc1", 9100);
-    put("pc2", 9101);
+    put("pc1", 9101);
+    put("pc2", 9100);
 }};
 HashMap<String,Integer> widths = new HashMap<String, Integer>() {{
     put("pc1", 640);
@@ -34,6 +34,8 @@ ReceiverThread thread;
 void setup() {
   //fullScreen();
   size(640, 480);
+  
+  println("Listening on port: " + clientPort);
   
   video = createImage(imageWidth, imageHeight, RGB);
   thread = new ReceiverThread(video.width, video.height);
