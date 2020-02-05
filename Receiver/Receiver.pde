@@ -8,8 +8,25 @@ import javax.imageio.*;
 import java.net.*;
 import java.io.*;
 
+String machineId = "pc1";
+
 // Config
-int port = 9100;
+HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
+    put("pc1", 9100);
+    put("pc2", 9101);
+}};
+HashMap<String,Integer> widths = new HashMap<String, Integer>() {{
+    put("pc1", 640);
+    put("pc2", 640);
+}};
+HashMap<String,Integer> heights = new HashMap<String, Integer>() {{
+    put("pc1", 480);
+    put("pc2", 480);
+}};
+
+int imageWidth = widths.get(machineId);
+int imageHeight = heights.get(machineId);
+int clientPort = ports.get(machineId); 
 
 PImage video;
 ReceiverThread thread;
@@ -18,7 +35,7 @@ void setup() {
   //fullScreen();
   size(640, 480);
   
-  video = createImage(640, 480, RGB);
+  video = createImage(imageWidth, imageHeight, RGB);
   thread = new ReceiverThread(video.width, video.height);
   thread.start();
 }

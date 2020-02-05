@@ -24,7 +24,6 @@ void broadcast(PImage input) {
   byte[] packet = outputStream.toByteArray();
 
   // Send JPEG data as a datagram
-//  println("Sending datagram with " + packet.length + " bytes");
   try {
     socket.send(new DatagramPacket(
       packet,packet.length, 

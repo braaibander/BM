@@ -20,7 +20,7 @@ class ReceiverThread extends Thread {
     available = true; // We start with "loading . . " being available
 
     try {
-      ds = new DatagramSocket(port);
+      ds = new DatagramSocket(clientPort);
     } catch (SocketException e) {
       e.printStackTrace();
     }
