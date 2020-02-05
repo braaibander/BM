@@ -90,7 +90,6 @@ class ReceiverThread extends Thread {
     System.out.println("Quitting."); 
     running = false;  // Setting running to false ends the loop in run()
     // In case the thread is waiting. . .
-    interrupt();
+//    interrupt();
   }
 }
-

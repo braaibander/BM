@@ -8,13 +8,18 @@ import javax.imageio.*;
 import java.net.*;
 import java.io.*;
 
+// Config
+Boolean fullScreen = true;
+
 PImage video;
 ReceiverThread thread;
 
 void setup() {
-  size(400,300);
-  video = createImage(320,240,RGB);
-  thread = new ReceiverThread(video.width,video.height);
+  //fullScreen();
+  size(640, 480);
+  
+  video = createImage(640, 480, RGB);
+  thread = new ReceiverThread(video.width, video.height);
   thread.start();
 }
 
@@ -26,5 +31,5 @@ void setup() {
   // Draw the image
   background(0);
   imageMode(CENTER);
-  image(video,width/2,height/2);
+  image(video, width/2, height/2);
 }
