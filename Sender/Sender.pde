@@ -3,6 +3,7 @@ import javax.imageio.*;
 import java.awt.image.*; 
 import java.net.*;
 import java.io.*;
+import java.time.*;
 
 String machineId = "pc1";
 
@@ -34,7 +35,7 @@ DatagramSocket socket;
 Capture cam;
 
 void setup() { 
-  size(1280, 720);
+  size(1, 1, P2D);
   
   println("Sending to: " + location + ":" + clientPort);
   println("Dimensions: " + imageWidth + "x" + imageHeight);
@@ -42,6 +43,7 @@ void setup() {
   try {
     socket = new DatagramSocket();
   } catch (SocketException e) {
+    println("Exception at: " + LocalDate.now() + " " + LocalTime.now());
     e.printStackTrace();
   }
   

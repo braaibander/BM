@@ -1,12 +1,8 @@
-// Daniel Shiffman
-// <http://www.shiffman.net>
-
-// A Thread using receiving UDP to receive images
-
 import java.awt.image.*; 
 import javax.imageio.*;
 import java.net.*;
 import java.io.*;
+import java.time.*;
 
 String machineId = "pc1";
 
@@ -33,7 +29,7 @@ ReceiverThread thread;
 
 void setup() {
   //fullScreen();
-  size(640, 480);
+  size(640, 480, P2D);
   
   println("Listening on port: " + clientPort);
   

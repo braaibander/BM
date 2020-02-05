@@ -22,6 +22,7 @@ class ReceiverThread extends Thread {
     try {
       ds = new DatagramSocket(clientPort);
     } catch (SocketException e) {
+      println("SocketException at: " + LocalDate.now() + " " + LocalTime.now());
       e.printStackTrace();
     }
   }
@@ -57,6 +58,7 @@ class ReceiverThread extends Thread {
       ds.receive(p);
     } 
     catch (IOException e) {
+      println("IOException at: " + LocalDate.now() + " " + LocalTime.now());
       e.printStackTrace();
     } 
     byte[] data = p.getData();
@@ -75,6 +77,7 @@ class ReceiverThread extends Thread {
       bimg.getRGB(0, 0, img.width, img.height, img.pixels, 0, img.width);
     } 
     catch (Exception e) {
+      println("Exception at: " + LocalDate.now() + " " + LocalTime.now());
       e.printStackTrace();
     }
     // Update the PImage pixels
