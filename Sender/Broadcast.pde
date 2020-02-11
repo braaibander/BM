@@ -16,12 +16,13 @@ void broadcast(PImage input) {
     // Get the byte array, which we will send out via UDP!
     byte[] packet = outputStream.toByteArray();
   
+    udp.send(packet, location, clientPort);
     // Send JPEG data as a datagram
-    socket.send(new DatagramPacket(
-      packet,packet.length, 
-      InetAddress.getByName(location),
-      clientPort
-    ));
+    //socket.send(new DatagramPacket(
+    //  packet,packet.length, 
+    //  InetAddress.getByName(location),
+    //  clientPort
+    //));
   } 
   catch (Exception e) {
      println("Exception at: " + LocalDate.now() + " " + LocalTime.now());

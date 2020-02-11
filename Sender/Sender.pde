@@ -1,3 +1,4 @@
+import hypermedia.net.*;
 import processing.video.*;
 import javax.imageio.*;
 import java.awt.image.*; 
@@ -5,12 +6,12 @@ import java.net.*;
 import java.io.*;
 import java.time.*;
 
-String machineId = "pc1";
+String machineId = "pc2";
 
 // Config
 HashMap<String, String> ipAddresses = new HashMap<String, String>() {{
     put("pc1", "192.168.2.101");
-    put("pc2", "192.168.2.15");
+    put("pc2", "192.168.2.102");
 }};
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
     put("pc1", 9100);
@@ -33,9 +34,12 @@ int clientPort = ports.get(machineId);
 // This is our object that sends UDP out
 DatagramSocket socket; 
 Capture cam;
+UDP udp;
 
 void setup() { 
   size(1, 1, P2D);
+  
+  udp = new UDP(this);
   
   println("Sending to: " + location + ":" + clientPort);
   println("Dimensions: " + imageWidth + "x" + imageHeight);
