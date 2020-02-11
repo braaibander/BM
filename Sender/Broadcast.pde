@@ -3,7 +3,7 @@ void broadcast(PImage input) {
 
   try{
     // Create buffered image for JPG encoding
-    BufferedImage bufferedImg = new BufferedImage(input.width, input.height, BufferedImage.TYPE_INT_RGB);
+    BufferedImage bufferedImg = new BufferedImage(input.width, input.height, BufferedImage.TYPE_INT_ARGB);
   
     // Load localFrame to the BufferedImage
     input.loadPixels();
@@ -17,12 +17,6 @@ void broadcast(PImage input) {
     byte[] packet = outputStream.toByteArray();
   
     udp.send(packet, location, clientPort);
-    // Send JPEG data as a datagram
-    //socket.send(new DatagramPacket(
-    //  packet,packet.length, 
-    //  InetAddress.getByName(location),
-    //  clientPort
-    //));
   } 
   catch (Exception e) {
      println("Exception at: " + LocalDate.now() + " " + LocalTime.now());

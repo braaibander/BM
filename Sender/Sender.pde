@@ -6,8 +6,6 @@ import java.net.*;
 import java.io.*;
 import java.time.*;
 
-String machineId = "pc2";
-
 // Config
 HashMap<String, String> ipAddresses = new HashMap<String, String>() {{
     put("pc1", "192.168.2.101");
@@ -26,30 +24,28 @@ HashMap<String,Integer> heights = new HashMap<String, Integer>() {{
     put("pc2", 480);
 }};
 
-int imageWidth = widths.get(machineId);
-int imageHeight = heights.get(machineId);
-String location = ipAddresses.get(machineId);
-int clientPort = ports.get(machineId); 
+String machineId;
+int imageWidth;
+int imageHeight;
+String location;
+int clientPort; 
 
-// This is our object that sends UDP out
-DatagramSocket socket; 
 Capture cam;
 UDP udp;
 
 void setup() { 
-  size(1, 1, P2D);
+  size(320, 240, P2D);
+  
+  machineId = getId();
+  imageWidth = widths.get(machineId);
+  imageHeight = heights.get(machineId);
+  location = ipAddresses.get(machineId);
+  clientPort = ports.get(machineId); 
   
   udp = new UDP(this);
   
   println("Sending to: " + location + ":" + clientPort);
   println("Dimensions: " + imageWidth + "x" + imageHeight);
-  
-  try {
-    socket = new DatagramSocket();
-  } catch (SocketException e) {
-    println("Exception at: " + LocalDate.now() + " " + LocalTime.now());
-    e.printStackTrace();
-  }
   
   cam = new Capture(this, imageWidth, imageHeight, 30);
   cam.start();
@@ -58,8 +54,4 @@ void setup() {
 void captureEvent( Capture c ) {
   c.read();
   broadcast(c);
-}
-
-void draw() {
-  image(cam,0,0);
 }

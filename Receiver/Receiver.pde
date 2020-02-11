@@ -1,10 +1,9 @@
+import hypermedia.net.*;
 import java.awt.image.*; 
 import javax.imageio.*;
 import java.net.*;
 import java.io.*;
 import java.time.*;
-
-String machineId = "pc1";
 
 // Config
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
@@ -20,9 +19,10 @@ HashMap<String,Integer> heights = new HashMap<String, Integer>() {{
     put("pc2", 480);
 }};
 
-int imageWidth = widths.get(machineId);
-int imageHeight = heights.get(machineId);
-int clientPort = ports.get(machineId); 
+String machineId;
+int imageWidth;
+int imageHeight;
+int clientPort; 
 
 PImage video;
 ReceiverThread thread;
@@ -30,6 +30,11 @@ ReceiverThread thread;
 void setup() {
   //fullScreen();
   size(640, 480, P2D);
+  
+  machineId = getId();
+  imageWidth = widths.get(machineId);
+  imageHeight = heights.get(machineId);
+  clientPort = ports.get(machineId); 
   
   println("Listening on port: " + clientPort);
   
