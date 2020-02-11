@@ -9,7 +9,7 @@ String machineId = "pc1";
 
 // Config
 HashMap<String, String> ipAddresses = new HashMap<String, String>() {{
-    put("pc1", "192.168.2.13");
+    put("pc1", "192.168.2.101");
     put("pc2", "192.168.2.15");
 }};
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
