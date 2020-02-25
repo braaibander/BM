@@ -7,7 +7,7 @@ import java.time.*;
 
 // Config
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
-    put("pc1", 9101);
+    put("pc1", 9200);
     put("pc2", 9100);
 }};
 HashMap<String,Integer> widths = new HashMap<String, Integer>() {{

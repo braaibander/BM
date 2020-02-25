@@ -5,6 +5,8 @@ import java.awt.image.*;
 import java.net.*;
 import java.io.*;
 import java.time.*;
+import processing.sound.*;
+import ddf.minim.*;
 
 // Config
 HashMap<String, String> ipAddresses = new HashMap<String, String>() {{
@@ -13,7 +15,7 @@ HashMap<String, String> ipAddresses = new HashMap<String, String>() {{
 }};
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
     put("pc1", 9100);
-    put("pc2", 9101);
+    put("pc2", 9200);
 }};
 HashMap<String,Integer> widths = new HashMap<String, Integer>() {{
     put("pc1", 640);
@@ -30,6 +32,10 @@ int imageHeight;
 String location;
 int clientPort; 
 
+Minim minim;
+InputOutputBind signal;
+AudioInput audioIn;
+AudioOutput audioOut;
 Capture cam;
 UDP udp;
 
@@ -49,6 +55,16 @@ void setup() {
   
   cam = new Capture(this, imageWidth, imageHeight, 30);
   cam.start();
+  
+  minim = new Minim(this);
+  int buffer = 1024;
+  audioOut = minim.getLineOut(Minim.MONO, buffer);
+  audioIn = minim.getLineIn(Minim.MONO, buffer);
+  signal = new InputOutputBind(buffer);
+  // add listener to gather incoming data
+  audioIn.addListener(signal);
+  // adds the signal to the output
+  audioOut.addSignal(signal);
 }
 
 void captureEvent( Capture c ) {
