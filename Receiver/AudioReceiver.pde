@@ -1,4 +1,4 @@
-class AudioReceiver extends Thread implements AudioSignal
+class AudioReceiver implements AudioSignal
 {
   DatagramSocket ds; 
   byte[] buffer = new byte[65536]; 
@@ -6,19 +6,20 @@ class AudioReceiver extends Thread implements AudioSignal
   AudioReceiver()
   {   
     try {
-      ds = new DatagramSocket(clientPort);
+      ds = new DatagramSocket(clientPort + 1);
     } catch (SocketException e) {
       println("SocketException at: " + LocalDate.now() + " " + LocalTime.now());
       e.printStackTrace();
     }
   }
   
-  // This part is implementing AudioSignal interface, see Minim reference
   void generate(float[] samp)
   {
     byte[] bytes = this.getData();
     float[] data = this.byteToFloat(bytes);
-    arrayCopy(data, samp);
+    if(data.length > 0){
+      arrayCopy(data, samp);
+    }
   }
   
   void generate(float[] left, float[] right){}
