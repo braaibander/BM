@@ -5,6 +5,7 @@ import java.awt.image.*;
 import java.net.*;
 import java.io.*;
 import java.time.*;
+import java.nio.*;
 import processing.sound.*;
 import ddf.minim.*;
 
@@ -33,9 +34,8 @@ String location;
 int clientPort; 
 
 Minim minim;
-InputOutputBind signal;
+Audiosender sender;
 AudioInput audioIn;
-AudioOutput audioOut;
 Capture cam;
 UDP udp;
 
@@ -57,14 +57,9 @@ void setup() {
   cam.start();
   
   minim = new Minim(this);
-  int buffer = 1024;
-  audioOut = minim.getLineOut(Minim.MONO, buffer);
-  audioIn = minim.getLineIn(Minim.MONO, buffer);
-  signal = new InputOutputBind(buffer);
-  // add listener to gather incoming data
-  audioIn.addListener(signal);
-  // adds the signal to the output
-  audioOut.addSignal(signal);
+  audioIn = minim.getLineIn(Minim.MONO, 1024);
+  sender = new Audiosender();
+  audioIn.addListener(sender);
 }
 
 void captureEvent( Capture c ) {

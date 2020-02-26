@@ -3,7 +3,10 @@ import java.awt.image.*;
 import javax.imageio.*;
 import java.net.*;
 import java.io.*;
+import java.nio.*;
 import java.time.*;
+import processing.sound.*;
+import ddf.minim.*;
 
 // Config
 HashMap<String,Integer> ports = new HashMap<String, Integer>() {{
@@ -27,6 +30,10 @@ int clientPort;
 PImage video;
 ReceiverThread thread;
 
+Minim minim;
+AudioOutput audioOut;
+AudioReceiver receiver;
+
 void setup() {
   //fullScreen();
   size(640, 480, P2D);
@@ -41,6 +48,11 @@ void setup() {
   video = createImage(imageWidth, imageHeight, RGB);
   thread = new ReceiverThread(video.width, video.height);
   thread.start();
+  
+  minim = new Minim(this);
+  audioOut = minim.getLineOut(Minim.MONO, 1024);
+  receiver = new AudioReceiver();
+  audioOut.addSignal(receiver);
 }
 
  void draw() {
